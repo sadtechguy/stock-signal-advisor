@@ -214,9 +214,47 @@ def auto_daily_screener_job():
     """
     print("\n[SCHEDULER] Menjalankan pemindaian saham otomatis harian (08.00 WIB)...")
     watchlist = ["BBCA", "BBRI", "BMRI", "TLKM", "ASII", "UNVR", "ICBP", "GOTO", "BREN"]
+    lq45_watchlist = [
+        # Perbankan & Keuangan
+        "BBCA", "BBRI", "BMRI", "BBNI", "BRIS", "ARTO",
+        
+        # Telekomunikasi & Menara
+        "TLKM", "ISAT", "EXCL", "TOWR", "MTEL",
+        
+        # Barang Konsumsi, Ritel & Unggas
+        "ICBP", "INDF", "UNVR", "MYOR", "AMRT", "ACES", "CPIN",
+        
+        # Otomotif & Konglomerasi
+        "ASII", "SRTG",
+        
+        # Energi, Tambang & Migas
+        "ADRO", "PTBA", "ITMG", "UNTR", "PGAS", "AKRA", "MEDC", "HRUM", "ESSA",
+        
+        # Logam Mineral & Emas
+        "AMMN", "MDKA", "INCO", "ANTM", "MBMA",
+        
+        # Infrastruktur & Semen
+        "JSMR", "SMGR", "INTP",
+        
+        # Energi Terbarukan & Petrokimia
+        "PGEO", "BRPT", 
+        
+        # Kertas & Kehutanan
+        "INKP", "TKIM",
+        
+        # Properti & Konstruksi
+        "CTRA", "BSDE",
+        
+        # Kesehatan & Farmasi
+        "KLBF",
+        
+        # Teknologi
+        "GOTO"
+    ]
+
     found_count = 0
 
-    for ticker in watchlist:
+    for ticker in lq45_watchlist:
         data = fetch_and_evaluate(ticker)
         if data and data["signal"] in ["BUY", "STRONG BUY"]:
             send_telegram_notification(data)
