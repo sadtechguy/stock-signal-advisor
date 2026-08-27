@@ -22,11 +22,6 @@ load_dotenv()
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
-custom_session = requests.Session()
-custom_session.headers.update({
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-})
-
 def send_telegram_notification(stock_data: dict):
     """
     Mengirimkan pesan ringkasan sinyal saham ke Telegram HP secara otomatis
@@ -96,7 +91,7 @@ app = FastAPI(
 def fetch_and_evaluate(symbol_ticker: str):
     # Tambahkan sufiks .JK secara otomatis untuk saham Indonesia jika belum ada
     ticker_code = f"{symbol_ticker}.JK" if not symbol_ticker.endswith(".JK") and "." not in symbol_ticker else symbol_ticker
-    stock = yf.Ticker(ticker_code, session=custom_session)
+    stock = yf.Ticker(ticker_code)
     
     try:
         df = stock.history(period="1y")
