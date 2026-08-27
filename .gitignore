@@ -1,0 +1,10 @@
+# Virtual Environment
+stock-signal-venv/
+venv/
+__pycache__/
+
+# Environment Variables (Sangat Rahasia!)
+.env
+
+# Cache Python
+*.pyc
